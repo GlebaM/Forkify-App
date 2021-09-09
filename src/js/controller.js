@@ -9,9 +9,9 @@ import paginationView from './views/paginationView';
 import 'core-js/stable'; //Polfifilling arrays etc.
 import 'regenerator-runtime/runtime'; //Polyfilling async await
 
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }
 
 ///////////////////////////////////////
 
@@ -34,9 +34,9 @@ const controlRecipes = async function () {
 const controlSearchResults = async function () {
   try {
     resultsView.renderSpinner();
-
     //1) Get search query
     const query = searchView.getQuery();
+    console.log(`Query controller ${query}`);
     if (!query) throw new Error('Oj');
 
     // 2) Load search results
@@ -52,8 +52,13 @@ const controlSearchResults = async function () {
   }
 };
 
+const controlPagination = function () {
+  console.log('Yay control pagiii');
+};
+
 const init = function () {
   recipeView.addHandlerRender(controlRecipes);
   searchView.addHandlerSearch(controlSearchResults);
+  paginationView.addHandlerClick(controlPagination);
 };
 init();
