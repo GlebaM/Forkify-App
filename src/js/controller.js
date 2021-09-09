@@ -34,26 +34,32 @@ const controlRecipes = async function () {
 const controlSearchResults = async function () {
   try {
     resultsView.renderSpinner();
-    //1) Get search query
+
+    // 2) Get search query
     const query = searchView.getQuery();
-    console.log(`Query controller ${query}`);
     if (!query) throw new Error('Oj');
 
-    // 2) Load search results
+    // 3) Load search results
     await model.loadSearchResults(query);
 
-    // 3) Render search results
-    resultsView.render(model.getSearchResultsPage(2));
+    // 4) Render search results
+    resultsView.render(model.getSearchResultsPage(1));
 
-    //4) Render initial pagination buttons
+    // 5) Render initial pagination buttons
     paginationView.render(model.state.search);
   } catch (err) {
     console.log(err);
   }
 };
 
-const controlPagination = function () {
-  console.log('Yay control pagiii');
+const controlPagination = function (goToPage) {
+  // 1) set model.state.search.page = goToPage
+  // model.state.search.page = goToPage;
+  // 2) Re-render search results
+  resultsView.render(model.getSearchResultsPage(goToPage));
+  // 3) Re-render initial pagination buttons
+  paginationView.render(model.state.search);
+  paginationView.render(model.state.search);
 };
 
 const init = function () {

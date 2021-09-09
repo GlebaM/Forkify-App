@@ -4,23 +4,21 @@ class PaginationView extends View {
   _parentElement = document.querySelector('.pagination');
 
   addHandlerClick(handler) {
-    this._parentElement = document.addEventListener('click', function (e) {
-      e.preventDefault();
+    this._parentElement.addEventListener('click', function (e) {
+      // e.preventDefault();
       const btn = e.target.closest('.btn--inline');
-      console.log(btn);
-      // handler();
+      if (!btn) return;
+      const goToPage = +btn.dataset.goto;
+      handler(goToPage);
     });
   }
 
   _generateMarkup() {
     // if (!this._data) return;
     const curPage = this._data.page;
-    console.log(curPage);
     const numPages = Math.ceil(
       this._data.results.length / this._data.resultsPerPage
     );
-
-    console.log(`Number of pages ${numPages}`);
 
     //Page 1 and thera are other pages
     if (curPage === 1 && numPages > 1) {
@@ -43,14 +41,14 @@ class PaginationView extends View {
     }
 
     //Page 1 and thera are no other pages
-    if (curPage === 1 && curPage === numPages)
-      console.log('dkftjghsekutiethdskg');
-    return 'Page one and no others';
+    if (curPage < 2 && curPage === numPages) return 'Page one and no others';
   }
 
   _generatePrevious(page) {
     return `
-        <button class="btn--inline pagination__btn--prev">
+        <button data-goto='${
+          page - 1
+        }' class="btn--inline pagination__btn--prev">
            <svg class="search__icon">
              <use href="${icons}#icon-arrow-left"></use>
            </svg>
@@ -59,7 +57,9 @@ class PaginationView extends View {
   }
   _generateNext(page) {
     return `
-         <button class="btn--inline pagination__btn--next">
+         <button data-goto='${
+           page + 1
+         }' class="btn--inline pagination__btn--next">
            <span>Page ${page + 1}</span>
            <svg class="search__icon">
              <use href="${icons}#icon-arrow-right"></use>
