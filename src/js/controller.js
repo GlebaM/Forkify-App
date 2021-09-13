@@ -14,7 +14,6 @@ import 'regenerator-runtime/runtime'; //Polyfilling async await
 // if (module.hot) {
 //   module.hot.accept();
 // }
-
 ///////////////////////////////////////
 
 const controlRecipes = async function () {
