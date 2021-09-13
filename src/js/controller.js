@@ -4,6 +4,8 @@ import recipeView from './views/recipeView';
 import searchView from './views/searchView';
 import resultsView from './views/resultsView';
 import paginationView from './views/paginationView';
+import bookmarksView from './views/bookmarksView';
+import addUserRecipeView from './views/addUserRecipeView';
 
 //Dependencies
 import 'core-js/stable'; //Polfifilling arrays etc.
@@ -21,10 +23,16 @@ const controlRecipes = async function () {
     if (!id) return console.log(`'Id' doesn't exist, but it's not an error`);
     recipeView.renderSpinner();
 
-    // 1) Loading recipe
+    // 1) Update results view to mark selected search result
+    resultsView.update(model.getSearchResultsPage());
+
+    // 2) Update bookmarks view
+    bookmarksView.update(model.state.bookmarks);
+
+    // 3) Loading recipe
     await model.loadRecipe(id);
 
-    // 2) Rendering recipe
+    // 4) Rendering recipe
     recipeView.render(model.state.recipe);
   } catch (err) {
     recipeView.renderError();
@@ -59,12 +67,49 @@ const controlPagination = function (goToPage) {
   resultsView.render(model.getSearchResultsPage(goToPage));
   // 3) Re-render initial pagination buttons
   paginationView.render(model.state.search);
-  paginationView.render(model.state.search);
+};
+
+const controlServings = function (newServings) {
+  // 1)Update the recipe sevings (in state)
+  model.updateServings(newServings);
+  // 2) Update the recipe view
+  // Re-rendering recipe
+  recipeView.update(model.state.recipe);
+};
+
+const controlAddBookmark = function () {
+  // 1) Add or remove bookmark
+  if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
+  else model.deleteBookmark(model.state.recipe.id);
+
+  // 2) Update the recipe view
+  recipeView.update(model.state.recipe);
+
+  // 3) Render bookmark
+  bookmarksView.render(model.state.bookmarks);
+};
+
+const controlBookmarks = function () {
+  bookmarksView.render(model.state.bookmarks);
+};
+
+const controlAddRecipe = function (newRecipe) {
+  console.log(newRecipe);
+
+  // Upload new recipe data
 };
 
 const init = function () {
+  bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandServings(controlServings);
+  recipeView.addHandlerAddBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
+  addUserRecipeView.addHandlerUpload(controlAddRecipe);
+};
+
+const clearBookmarks = function () {
+  localStorage.clear('bookmarks');
 };
 init();

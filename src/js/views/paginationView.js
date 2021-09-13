@@ -41,7 +41,7 @@ class PaginationView extends View {
     }
 
     //Page 1 and thera are no other pages
-    if (curPage < 2 && curPage === numPages) return 'Page one and no others';
+    if (curPage < 2 && curPage === numPages) return '';
   }
 
   _generatePrevious(page) {
@@ -66,25 +66,6 @@ class PaginationView extends View {
            </svg>
         </button>`;
   }
-
-  // _generateMarkupStart() {}
-
-  // _generateMarkupMiddle() {}
-
-  // _generateMarkupLast() {}
 }
 
 export default new PaginationView();
-
-//  <button class="btn--inline pagination__btn--prev">
-//             <svg class="search__icon">
-//               <use href="src/img/icons.svg#icon-arrow-left"></use>
-//             </svg>
-//             <span>Page 1</span>
-//           </button>
-//           <button class="btn--inline pagination__btn--next">
-//             <span>Page 3</span>
-//             <svg class="search__icon">
-//               <use href="src/img/icons.svg#icon-arrow-right"></use>
-//             </svg>
-//           </button>
