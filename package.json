@@ -17,14 +17,27 @@
   },
   "homepage": "https://github.com/GlebaM/Forkify-App#readme",
   "devDependencies": {
-    "@parcel/transformer-image": "^2.0.0-rc.0",
-    "@parcel/transformer-sass": "^2.0.0-rc.0",
-    "fractional": "^1.0.0",
-    "parcel": "^2.0.0-rc.0",
+    "parcel": "^2.0.0-beta.1",
     "sass": "^1.39.0"
   },
   "dependencies": {
     "core-js": "^3.17.2",
+    "fractional": "^1.0.0",
     "regenerator-runtime": "^0.13.9"
+  },
+  "module.exports": {
+    "plugins": [
+      {
+        "name": "'preset-default'",
+        "params": {
+          "overrides": {
+            "convertShapeToPath": {
+              "convertArcs": true
+            },
+            "convertPathData": false
+          }
+        }
+      }
+    ]
   }
 }
