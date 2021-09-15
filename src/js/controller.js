@@ -1,18 +1,17 @@
-
 //Import scripts/methods
-import * as model from './model.js';
-import { MODAL_CLOSE_SEC } from './config.js';
-import recipeView from './views/recipeView.js';
-import searchView from './views/searchView.js';
-import resultsView from './views/resultsView.js';
-import paginationView from './views/paginationView.js';
-import bookmarksView from './views/bookmarksView.js';
-import addUserRecipeView from './views/addUserRecipeView.js';
+import * as model from "./model.js";
+import { MODAL_CLOSE_SEC } from "./config.js";
+import recipeView from "./views/recipeView.js";
+import searchView from "./views/searchView.js";
+import resultsView from "./views/resultsView.js";
+import paginationView from "./views/paginationView.js";
+import bookmarksView from "./views/bookmarksView.js";
+import addUserRecipeView from "./views/addUserRecipeView.js";
 
 //Dependencies
-import 'core-js/stable'; //Polfifilling arrays etc.
-import 'regenerator-runtime/runtime'; //Polyfilling async await
-import { async } from 'regenerator-runtime';
+import "core-js/stable"; //Polfifilling arrays etc.
+import "regenerator-runtime/runtime"; //Polyfilling async await
+import { async } from "regenerator-runtime";
 
 ///////////////////////////////////////
 
@@ -44,7 +43,7 @@ const controlSearchResults = async function () {
 
     // 2) Get search query
     const query = searchView.getQuery();
-    if (!query) throw new Error('Oj');
+    if (!query) throw new Error("Oj");
 
     // 3) Load search results
     await model.loadSearchResults(query);
@@ -113,14 +112,14 @@ const controlAddRecipe = async function (newRecipe) {
     controlBookmarks();
 
     // Change ID in URL
-    window.history.pushState(null, '', `#${model.state.recipe.id}`);
+    window.history.pushState(null, "", `#${model.state.recipe.id}`);
 
     // Close form window
     setTimeout(function () {
       addUserRecipeView.toggleWindow();
     }, MODAL_CLOSE_SEC * 1000);
   } catch (err) {
-    console.error('♨', err);
+    console.error("♨", err);
     addUserRecipeView.renderError(err.message);
   }
 };
@@ -136,18 +135,17 @@ const init = function () {
 };
 
 const clearBookmarks = function () {
-  localStorage.clear('bookmarks');
+  localStorage.clear("bookmarks");
 };
 // clearBookmarks();
 init();
-=======
 // import icons from '../img/icons.svg';//Pacel 1
-import icons from 'url:../img/icons.svg';
-import 'core-js/stable'; //Polfifilling arrays etc.
-import 'regenerator-runtime/runtime'; //Polyfilling async await
+import icons from "url:../img/icons.svg";
+import "core-js/stable"; //Polfifilling arrays etc.
+import "regenerator-runtime/runtime"; //Polyfilling async await
 console.log(icons);
 
-const recipeContainer = document.querySelector('.recipe');
+const recipeContainer = document.querySelector(".recipe");
 
 const timeout = function (s) {
   return new Promise(function (_, reject) {
@@ -166,8 +164,8 @@ const renderSpinner = function (parentEl) {
             <use href="${icons}#icon-loader"></use>
           </svg>
         </div> `;
-  parentEl.innerHTML = '';
-  parentEl.insertAdjacentHTML('afterbegin', markup);
+  parentEl.innerHTML = "";
+  parentEl.insertAdjacentHTML("afterbegin", markup);
 };
 
 const showRecipe = async function () {
@@ -296,8 +294,8 @@ const showRecipe = async function () {
           </a>
         </div>`;
     console.log(recipe.image);
-    recipeContainer.innerHTML = '';
-    recipeContainer.insertAdjacentHTML('afterbegin', markup);
+    recipeContainer.innerHTML = "";
+    recipeContainer.insertAdjacentHTML("afterbegin", markup);
   } catch (err) {
     alert(err.message);
   }
@@ -305,8 +303,9 @@ const showRecipe = async function () {
 // showRecipe();
 
 //Best
-['hashchange', 'load'].forEach(evt => window.addEventListener(evt, showRecipe));
+["hashchange", "load"].forEach((evt) =>
+  window.addEventListener(evt, showRecipe)
+);
 
 // window.addEventListener('hashchange', showRecipe);
 // window.addEventListener('load', showRecipe);
-

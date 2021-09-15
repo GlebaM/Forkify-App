@@ -1,8 +1,8 @@
-import View from './View.js';
-import icons from 'url:../../img/icons.svg';
+import View from "./View.js";
+import icons from "url:../../img/icons.svg";
 
 class PreviewView extends View {
-  _parentElement = '';
+  _parentElement = "";
 
   _generateMarkup() {
     const id = window.location.hash.slice(1);
@@ -10,7 +10,7 @@ class PreviewView extends View {
     return `
           <li class="preview">
             <a class="preview__link ${
-              this._data.id === id ? 'preview__link--active' : ''
+              this._data.id === id ? "preview__link--active" : ""
             }" href="#${this._data.id}">
               <figure class="preview__fig">
                 <img src="${this._data.image}" crossorigin="" alt="${
@@ -21,7 +21,7 @@ class PreviewView extends View {
                 <h4 class="preview__title">${this._data.title}.</h4>
                 <p class="preview__publisher">${this._data.publisher}</p>
                 <div class="preview__user-generated ${
-                  this._data.key ? '' : 'hidden'
+                  this._data.key ? "" : "hidden"
                 }">
                   <svg>
                     <use href="${icons}#icon-user"></use>
