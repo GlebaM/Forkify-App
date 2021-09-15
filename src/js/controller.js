@@ -1,21 +1,18 @@
 //Import scripts/methods
 import * as model from './model.js';
-import { MODAL_CLOSE_SEC } from './config';
-import recipeView from './views/recipeView';
-import searchView from './views/searchView';
-import resultsView from './views/resultsView';
-import paginationView from './views/paginationView';
-import bookmarksView from './views/bookmarksView';
-import addUserRecipeView from './views/addUserRecipeView';
+import { MODAL_CLOSE_SEC } from './config.js';
+import recipeView from './views/recipeView.js';
+import searchView from './views/searchView.js';
+import resultsView from './views/resultsView.js';
+import paginationView from './views/paginationView.js';
+import bookmarksView from './views/bookmarksView.js';
+import addUserRecipeView from './views/addUserRecipeView.js';
 
 //Dependencies
 import 'core-js/stable'; //Polfifilling arrays etc.
 import 'regenerator-runtime/runtime'; //Polyfilling async await
 import { async } from 'regenerator-runtime';
 
-if (module.hot) {
-  module.hot.accept();
-}
 ///////////////////////////////////////
 
 const controlRecipes = async function () {

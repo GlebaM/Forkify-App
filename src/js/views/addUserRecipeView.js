@@ -1,4 +1,5 @@
-import View from './View';
+import View from './View.js';
+import icons from 'url:../../img/icons.svg'; // Parcel 2
 class AddUserRecipeView extends View {
   _parentElement = document.querySelector('.upload');
   _message = 'Recipe was succesfully uploaded :)';
@@ -35,8 +36,6 @@ class AddUserRecipeView extends View {
       handler(data);
     });
   }
-
-  _generateMarkup() {}
 }
 
 export default new AddUserRecipeView();
